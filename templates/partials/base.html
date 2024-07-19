@@ -1,0 +1,86 @@
+{% load static %}
+
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <link rel="stylesheet" href="https://bootswatch.com/5/slate/bootstrap.min.css">
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+    <title>Lumina CRM</title>
+<!--     <script type="text/javascript">-->
+<!--        window.onpageshow = function(event) {-->
+<!--            if (event.persisted || (window.performance && window.performance.navigation.type == 1)) {-->
+<!--                window.location.href = "{% url 'core:dashboard' %}";-->
+<!--            }-->
+<!--        };-->
+<!--    </script>-->
+</head>
+<body>
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark justify-content-center container">
+    <a class="navbar-brand main-heading" href="/"> &nbsp; Lumina CRM</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
+            aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+      <div class="collapse navbar-collapse text-center" id="navbarNavDropdown">
+        <ul class="navbar-nav mr-auto">
+          &nbsp;     &nbsp;     &nbsp;
+          {% if user.is_authenticated %}
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'core:dashboard' %}">Dashboard &nbsp; <i class="fa fa-home" aria-hidden="true"></i></a>
+            </li>
+            &nbsp;     &nbsp;     &nbsp;
+            <li class="nav-item">
+              <a class="nav-link" href="">@{{ request.user }} &nbsp; <i class="fa fa-account" aria-hidden="true"></i></a>
+            </li>
+
+              &nbsp;     &nbsp;     &nbsp;
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'userauths:logout' %}">Logout &nbsp; <i class="fa fa-sign-out" aria-hidden="true"></i></a>
+            </li>
+
+        {% else %}
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'userauths:register' %}"> Register <i class="fa fa-user-plus" aria-hidden="true"></i></a>
+        </li>
+        &nbsp;     &nbsp;     &nbsp;
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'userauths:login' %}">Login <i class="fa fa-sign-in" aria-hidden="true"></i></a>
+        </li>
+        {% endif %}
+      </ul>
+      </div>
+  </nav>
+
+    <div class="container mt-3">
+        {% if messages %}
+        {% for message in messages %}
+            <div id="message-timer" class="container alert alert-{{message.tags}} text-center">
+                <span style="font-weight: 200;"><strong>{{ message }}</strong></span>
+            </div>
+        {% endfor %}
+    {% endif %}
+    </div>
+
+<!--    {% comment %}{% for message in messages %}-->
+<!--       <p class="alert alert-{{message.tags}} text-center" id="vincent">{{ message }}</p>-->
+<!--    {% endfor %} {% endcomment %}-->
+
+<div class="container">
+    {% block content %}
+    {% endblock content %}
+</div>
+
+
+<script src="{% static 'js/main.js' %}">     </script>
+
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js" integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy" crossorigin="anonymous"></script>
+</body>
+</html>
