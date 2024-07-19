@@ -20,7 +20,7 @@ SECRET_KEY = os.getenv("SECRET_KEY")
 DEBUG = os.getenv("DEBUG", False)
 
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["crm-9zxc.onrender.com", "127.0.0.1"]
 
 LOGIN_URL = "userauths:login"
 LOGIN_REDIRECT_URL = "/"
